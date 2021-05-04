@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 export default function ClientsPage() {
   const router = useRouter()
-  console.console.log(router.query);
+  console.log(router.query);
 
   return (
     <div>

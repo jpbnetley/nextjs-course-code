@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-function HomePage(props) {
+const HomePage = props => {
   return (
     <Fragment>
       <Head>
@@ -11,18 +11,18 @@ function HomePage(props) {
           content='I post about programming and web development.'
         />
       </Head>
-      <Hero />
-      <FeaturedPosts posts={props.posts} />
+      <div>
+        <h1>The home page</h1>
+      </div>
     </Fragment>
   );
 }
 
-export function getStaticProps() {
-  const featuredPosts = getFeaturedPosts();
+export const getStaticProps = () => {
 
   return {
     props: {
-      posts: featuredPosts,
+      posts: [],
     },
   };
 }

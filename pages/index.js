@@ -1,18 +1,15 @@
 import { Fragment } from 'react';
-import Head from 'next/head';
+import { getFeaturedEvents } from '../dummy-data'
+import EventList from '../components/events/event-list';
 
-const HomePage = props => {
+const HomePage = () => {
+
+  const featuredEvents = getFeaturedEvents()
+
   return (
     <Fragment>
-      <Head>
-        <title>Max' Blog</title>
-        <meta
-          name='description'
-          content='I post about programming and web development.'
-        />
-      </Head>
       <div>
-        <h1>The home page</h1>
+        <EventList items={featuredEvents} />
       </div>
     </Fragment>
   );

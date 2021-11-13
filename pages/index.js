@@ -11,20 +11,9 @@ function HomePage(props) {
           content='I post about programming and web development.'
         />
       </Head>
-      <Hero />
-      <FeaturedPosts posts={props.posts} />
     </Fragment>
   );
 }
 
-export function getStaticProps() {
-  const featuredPosts = getFeaturedPosts();
-
-  return {
-    props: {
-      posts: featuredPosts,
-    },
-  };
-}
 
 export default HomePage;

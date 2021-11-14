@@ -1,3 +1,5 @@
+import router from 'next/router'
+
 const FilterEventsPage = () => {
   return (
     <div>

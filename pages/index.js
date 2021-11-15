@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
-import Head from 'next/head';
 
 function HomePage(props) {
+  const { products } = props
+
   return (
     <Fragment>
       <ul>
-        <li>Product 1</li>
-        <li>Product 2</li>
-        <li>Product 3</li>
+        {products.map(({ id, title }) =>
+          <li key={id}>{title}</li>
+        )}
       </ul>
     </Fragment>
   );
@@ -15,3 +16,12 @@ function HomePage(props) {
 
 
 export default HomePage;
+
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      products: [{ id: 'p1', title: 'Product 1' }]
+    }
+  }
+}

@@ -4,13 +4,11 @@ import Head from 'next/head';
 function HomePage(props) {
   return (
     <Fragment>
-      <Head>
-        <title>Max' Blog</title>
-        <meta
-          name='description'
-          content='I post about programming and web development.'
-        />
-      </Head>
+      <ul>
+        <li>Product 1</li>
+        <li>Product 2</li>
+        <li>Product 3</li>
+      </ul>
     </Fragment>
   );
 }

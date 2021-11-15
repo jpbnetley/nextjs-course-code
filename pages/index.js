@@ -1,16 +1,17 @@
-import { Fragment } from 'react';
+import path from 'path'
+import fs from 'fs/promises'
 
 function HomePage(props) {
   const { products } = props
 
   return (
-    <Fragment>
+    <>
       <ul>
         {products.map(({ id, title }) =>
           <li key={id}>{title}</li>
         )}
       </ul>
-    </Fragment>
+    </>
   );
 }
 
@@ -19,9 +20,12 @@ export default HomePage;
 
 
 export const getStaticProps = async () => {
+  const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
+  const jsonData = await fs.readFile(filePath)
+  const data = JSON.parse(jsonData)
   return {
     props: {
-      products: [{ id: 'p1', title: 'Product 1' }]
+      products: data.products
     }
   }
 }

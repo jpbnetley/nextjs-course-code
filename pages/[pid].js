@@ -17,8 +17,6 @@ export const getStaticProps = async context => {
 
   const data = await readDataFromFile()
 
-  console.log(data)
-
   const product = data.products.find(({ id }) => productId === id)
 
   return {

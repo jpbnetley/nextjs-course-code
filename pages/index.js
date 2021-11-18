@@ -1,5 +1,5 @@
-import path from 'path'
-import fs from 'fs/promises'
+import Link from 'next/link'
+import readDataFromFile from '../util/read-data-from-file'
 
 function HomePage(props) {
   const { products } = props
@@ -8,7 +8,9 @@ function HomePage(props) {
     <>
       <ul>
         {products.map(({ id, title }) =>
-          <li key={id}>{title}</li>
+          <li key={id}>
+            <Link href={`/${id}`}>{title}</Link>
+          </li>
         )}
       </ul>
     </>
@@ -20,9 +22,8 @@ export default HomePage;
 
 
 export const getStaticProps = async () => {
-  const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
-  const jsonData = await fs.readFile(filePath)
-  const data = JSON.parse(jsonData)
+
+  const data = await readDataFromFile()
 
   if (!data) {
     return {

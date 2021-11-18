@@ -17,6 +17,8 @@ export const getStaticProps = async context => {
 
   const data = await readDataFromFile()
 
+  console.log(data)
+
   const product = data.products.find(({ id }) => productId === id)
 
   return {
@@ -25,6 +27,17 @@ export const getStaticProps = async context => {
     }
   }
 
+}
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { pid: 'p1' } },
+      { params: { pid: 'p2' } },
+      { params: { pid: 'p3' } },
+    ],
+    fallback: false
+  }
 }
 
 export default ProductDetailPage

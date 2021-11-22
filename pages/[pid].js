@@ -3,6 +3,9 @@ import readDataFromFile from '../util/read-data-from-file'
 const ProductDetailPage = (props) => {
 
   const { loadedProduct } = props
+
+  if (!loadedProduct) return <p>Loading...</p>
+
   const { title, description } = loadedProduct
 
   return <>
@@ -30,11 +33,9 @@ export const getStaticProps = async context => {
 export const getStaticPaths = async () => {
   return {
     paths: [
-      { params: { pid: 'p1' } },
-      { params: { pid: 'p2' } },
-      { params: { pid: 'p3' } },
+      { params: { pid: 'p1' } }
     ],
-    fallback: false
+    fallback: true // or could be 'blocking'
   }
 }
 

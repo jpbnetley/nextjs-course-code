@@ -31,10 +31,13 @@ export const getStaticProps = async context => {
 }
 
 export const getStaticPaths = async () => {
+  const data = await readDataFromFile()
+  const ids = data.products.map(({ id }) => id)
+
+  const pathWithParams = ids.map(id => ({ params: { pid: id } }))
+
   return {
-    paths: [
-      { params: { pid: 'p1' } }
-    ],
+    paths: pathWithParams,
     fallback: true // or could be 'blocking'
   }
 }

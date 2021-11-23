@@ -1,4 +1,4 @@
-import readDataFromFile from '../util/read-data-from-file'
+import readDataFromFile from '../../util/read-data-from-file'
 
 const ProductDetailPage = (props) => {
 

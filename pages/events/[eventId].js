@@ -1,16 +1,17 @@
 import { Fragment } from 'react'
-import { getEventById, getAllEvents } from '../../util/api-util'
+import { getEventById, getFeaturedEvents } from '../../util/api-util'
 import EventSummary from '../../components/event-detail/event-summary'
 import Logistics from '../../components/event-detail/event-logistics'
 import EventContent from '../../components/event-detail/event-content'
-import ErrorAlert from '../../components/ui/error-alert'
 
 const EventDetail = (props) => {
 
   const { selectedEvent } = props
 
   if (!selectedEvent) {
-    return <ErrorAlert><p>No event found!</p></ErrorAlert>
+    return <div className='center'>
+      <p>Loading...</p>
+    </div>
   }
 
   const { description, title, date, location, image } = selectedEvent
@@ -34,17 +35,18 @@ export const getStaticProps = async context => {
   return {
     props: {
       selectedEvent: event
-    }
+    },
+    revalidate: 30
   }
 
 }
 
 export const getStaticPaths = async () => {
-  const events = await getAllEvents()
+  const events = await getFeaturedEvents()
   const paths = events.map(({ id }) => ({ params: { eventId: id } }))
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
 

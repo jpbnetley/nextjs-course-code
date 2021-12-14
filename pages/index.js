@@ -1,13 +1,16 @@
+import Head from 'next/head';
 import { Fragment } from 'react';
 import EventList from '../components/events/event-list';
 import { getFeaturedEvents } from '../util/api-util';
 
 const HomePage = ({ events }) => (
-  <Fragment>
-    <div>
-      <EventList items={events} />
-    </div>
-  </Fragment>
+  <div>
+    <Head>
+      <title>NextJS Events</title>
+      <meta name='description' content='Find a lot of great events that allow you to evolve' />
+    </Head>
+    <EventList items={events} />
+  </div>
 );
 
 

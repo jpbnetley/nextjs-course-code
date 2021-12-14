@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import useSWR from 'swr'
 import { useEffect, useState } from 'react'
 
@@ -58,6 +59,10 @@ const FilterEventsPage = ({ date, firebaseEventsUrl }) => {
 
   return (
     <>
+      <Head>
+        <title>Filter events</title>
+        <meta name='description' content={`All events for ${month}/${year}.`} />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>

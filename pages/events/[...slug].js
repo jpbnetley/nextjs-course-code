@@ -12,7 +12,7 @@ import filterEvents from '../../util/events/filter-events'
 import eventFetcher from '../../util/events/event-fetcher'
 
 
-const FilterEventsPage = ({ date, firebaseEventsUrl }) => {
+const FilterEventsPage = ({ firebaseEventsUrl }) => {
   const router = useRouter()
   const filterData = router.query.slug
 
@@ -25,18 +25,32 @@ const FilterEventsPage = ({ date, firebaseEventsUrl }) => {
     }
   }, [data])
 
-  if (!loadedEvents) return (<p className='center'>Loading...</p>)
-
   const [year, month] = filterData
   //+numYear: the + converts it to a number
   const numYear = +year
   const numMonth = +month
 
+  const date = `${numYear}/${numMonth}`
+
+
+
+  if (!loadedEvents) return (<p className='center'>Loading...</p>)
+
+  const PageHeadData = () =>
+    <Head>
+      <title>Filter events</title>
+      <meta name='description' content={`All events for ${month}/${year}.`} />
+    </Head>
+
+
+
   const isValidMonthRange = numMonth < 1 || numMonth > 12
   const isValidYearRange = numYear > 2030 || numYear < 2021
 
+
   if (isNaN(numYear) || isNaN(numMonth) || isValidYearRange || isValidMonthRange || error) return (
     <>
+      <PageHeadData />
       <ErrorAlert><p>Invalid filter, please adjust your values</p></ErrorAlert>
       <div className='center'>
         <Button link='/events'>Show All events</Button>
@@ -50,6 +64,7 @@ const FilterEventsPage = ({ date, firebaseEventsUrl }) => {
 
   if (filteredEventsLength === 0) return (
     <>
+      <PageHeadData />
       <ErrorAlert><p>No events found for the chosen filter!</p></ErrorAlert>
       <div className='center'>
         <Button link='/events'>Show All events</Button>
@@ -59,10 +74,7 @@ const FilterEventsPage = ({ date, firebaseEventsUrl }) => {
 
   return (
     <>
-      <Head>
-        <title>Filter events</title>
-        <meta name='description' content={`All events for ${month}/${year}.`} />
-      </Head>
+      <PageHeadData />
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>

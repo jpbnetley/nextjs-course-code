@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import classes from './event-item.module.css'
 import Button from './ui/button';
 import DateIcon from './icons/date-icon'
@@ -13,13 +15,13 @@ const EventItem = props => {
     year: 'numeric'
   })
 
-  const formattedAddress = location.replace(', ', '\n')
+  const formattedAddress = location?.replace(', ', '\n') || ''
   const imageSrc = `/${image}`
   const exploreLink = `/events/${id}`
 
   return (
     <li className={classes.item}>
-      <img src={imageSrc} alt={title} />
+      <Image src={imageSrc} alt={title} width={250} height={160}/>
       <div className={classes.content}>
 
         <div className={classes.summary}>
